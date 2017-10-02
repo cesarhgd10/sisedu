@@ -48,7 +48,7 @@ class User extends Authenticatable implements TableInterface
         $user->notify(new UserCreated($token));
       }
 
-      return $user;
+      return compact('user', 'password');
     }
 
     public static function assignEnrolment(User $user, $type)
