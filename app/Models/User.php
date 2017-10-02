@@ -44,7 +44,8 @@ class User extends Authenticatable implements TableInterface
       $user->save();
 
       if(isset($data['send_mail'])) {
-        $user->notify(new UserCreated());
+      	$token = \Password::broker()->createToken($user);
+        $user->notify(new UserCreated($token));
       }
 
       return $user;
