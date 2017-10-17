@@ -34,6 +34,10 @@ class User extends Authenticatable implements TableInterface
         'password', 'remember_token',
     ];
 
+		public function userable()
+		{
+			return $this->morphTo();
+		}
 
     public static function createUser($data)
     {
