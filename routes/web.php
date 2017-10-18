@@ -20,6 +20,11 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
   Auth::routes();
 
+  Route::group(['prefix' => 'users', 'as' => 'admin.user.'], function() {
+  	Route::name('settings.edit')->get('settings', 'Admin\UserSettingsController@edit');
+  	Route::name('settings.update')->put('settings', 'Admin\UserSettingsController@update');
+  });
+
   Route::group([
     'namespace' => 'Admin\\',
     'as' => 'admin.',

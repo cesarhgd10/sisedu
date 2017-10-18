@@ -19,14 +19,23 @@
             $navbar = Navbar::withBrand(config('app.name'), route('admin.dashboard'));
             $formLogout = '';
             if(Auth::check()) {
-                $arrayLinks = [
+                if(\Gate::allows('admin')) {
+                  $arrayLinks = [
                     ['link' => route('admin.users.index'), 'title' => 'Usuários'],
 
-                ];
+                  ];
+
+                  $navbar->withContent(Navigation::links($arrayLinks));
+
+                }
                 $arrayLinksRight = [
                     [
                         Auth::user()->name,
                         [
+                            [
+                                'link' => route('admin.user.settings.edit'),
+                                'title' => 'Configurações'
+                            ],
                             [
                                 'link' => route('logout'),
                                 'title' => 'Logout',
@@ -35,7 +44,8 @@
                         ]
                     ]
                 ];
-                $navbar->withContent(Navigation::links($arrayLinks))->withContent(Navigation::links($arrayLinksRight)->right());
+
+                $navbar->withContent(Navigation::links($arrayLinksRight)->right());
 
                 $formLogout = FormBuilder::plain([
                     'id' => 'form-logout',
