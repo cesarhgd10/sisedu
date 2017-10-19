@@ -24,6 +24,10 @@ class UserProfileForm extends Form
 				'label' => 'Complemento',
 				'rules' => 'max:255'
 			])
+			->add('neighborhood', 'text', [
+				'label' => 'Bairro',
+				'rules' => 'required|max:255'
+			])
 			->add('city', 'text', [
 				'label' => 'Cidade',
 				'rules' => 'required|max:255'

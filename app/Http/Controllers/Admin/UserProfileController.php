@@ -3,6 +3,7 @@
 
 namespace SisEdu\Http\Controllers\Admin;
 
+use Kris\LaravelFormBuilder\Form;
 use SisEdu\Forms\UserProfileForm;
 use SisEdu\Http\Controllers\Controller;
 use SisEdu\Models\User;
@@ -29,17 +30,18 @@ class UserProfileController extends Controller
 
 	public function update(User $user)
 	{
-		$form = FormBuilder::create(UserProfileForm::class);
+		$form = \FormBuilder::create(UserProfileForm::class);
 
-		if(!$form->isValid) {
+
+		if(!$form->isValid()) {
 			return redirect()
 				->back()
-				->withErrors()
+				->withErrors($form->getErrors())
 				->withInput();
 		}
 
 		$data = $form->getFieldValues();
-		$user->profile->address ? $user->profile->update($data) : $user->profile->create($data);
+		$user->profile->address ? $user->profile->update($data) : $user->profile()->create($data);
 
 		session()->flash('message', 'Perfil alterado com sucesso');
 		return redirect()->route('admin.users.profile.update', ['user' => $user->id]);

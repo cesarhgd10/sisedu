@@ -35,7 +35,7 @@ class User extends Authenticatable implements TableInterface
     ];
 
 		public function profile() {
-			return $this->hasOne(UserProfile::class);
+			return $this->hasOne(UserProfile::class)->withDefault();
 		}
 
 		public function userable()

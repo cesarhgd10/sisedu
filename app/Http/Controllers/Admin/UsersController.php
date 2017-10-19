@@ -3,7 +3,6 @@
 namespace SisEdu\Http\Controllers\Admin;
 
 use Kris\LaravelFormBuilder\Form;
-use Kris\LaravelFormBuilder\FormBuilder;
 use SisEdu\Forms\UserForm;
 use SisEdu\Models\User;
 use Illuminate\Http\Request;
