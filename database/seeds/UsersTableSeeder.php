@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use SisEdu\Models\User;
+use SisEdu\Models\UserProfile;
 
 class UsersTableSeeder extends Seeder {
   /**
@@ -15,12 +16,16 @@ class UsersTableSeeder extends Seeder {
       'email' => 'admin@user.com',
       'enrolment' => 100000
     ])->each(function(User $user) {
+    	$profile = factory(UserProfile::class)->make();
+    	$user->profile()->create($profile->toArray());
     	User::assignRole($user, User::ROLE_ADMIN);
     	$user->save();
     });
 
 	  factory(User::class, 10)->create()->each(function(User $user) {
 		  if(!$user->userable) {
+			  $profile = factory(UserProfile::class)->make();
+			  $user->profile()->create($profile->toArray());
 			  User::assignRole($user, User::ROLE_TEACHER);
 			  User::assignEnrolment(new User(), User::ROLE_TEACHER);
 			  $user->save();
@@ -30,6 +35,8 @@ class UsersTableSeeder extends Seeder {
 
 	  factory(User::class, 10)->create()->each(function(User $user) {
 		  if(!$user->userable) {
+			  $profile = factory(UserProfile::class)->make();
+			  $user->profile()->create($profile->toArray());
 			  User::assignRole($user, User::ROLE_STUDENT);
 			  User::assignEnrolment(new User(), User::ROLE_STUDENT);
 			  $user->save();
