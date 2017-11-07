@@ -1,7 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: resultate
- * Date: 19/10/17
- * Time: 15:47
- */
+
+namespace SisEdu\Forms;
+
+use Kris\LaravelFormBuilder\Form;
+
+class SubjectForm extends Form
+{
+	public function buildForm()
+	{
+		$this
+			->add('name', 'text', [
+				'label' => 'Nome',
+				'rules' => 'required|max:255'
+			]);
+	}
+}

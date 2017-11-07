@@ -3,10 +3,10 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <h3>Ver disciplina</h3>
+      <h3>Ver turma</h3>
       @php
-        $linkEdit = route('admin.subjects.edit',['subject' => $subject->id]);
-        $linkDelete = route('admin.subjects.destroy',['subject' => $subject->id]);
+        $linkEdit = route('admin.class_students.edit',['class_students' => $class_student->id]);
+        $linkDelete = route('admin.class_students.destroy',['class_students' => $class_student->id]);
       @endphp
       {!! Button::primary(Icon::pencil().' Editar')->asLinkTo($linkEdit) !!}
       {!!
@@ -29,11 +29,27 @@
         <tbody>
         <tr>
           <th scope="row">ID</th>
-          <td>{{$subject->id}}</td>
+          <td>{{$class_student->id}}</td>
         </tr>
         <tr>
-          <th scope="row">Nome</th>
-          <td>{{$subject->name}}</td>
+          <th scope="row">Data Início</th>
+          <td>{{$class_student->date_start->format('d/m/Y')}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Data Fim</th>
+          <td>{{$class_student->date_start->format('d/m/Y')}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ciclo</th>
+          <td>{{$class_student->cycle}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Subdivisão</th>
+          <td>{{$class_student->subdivision}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Semester</th>
+          <td>{{$class_student->year}}</td>
         </tr>
         </tbody>
       </table>

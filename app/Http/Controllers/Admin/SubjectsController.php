@@ -1,6 +1,6 @@
 <?php
 
-namespace SON\Http\Controllers\Admin;
+namespace SisEdu\Http\Controllers\Admin;
 
 use Kris\LaravelFormBuilder\Form;
 use SisEdu\Forms\SubjectForm;
