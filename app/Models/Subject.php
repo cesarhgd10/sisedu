@@ -31,7 +31,7 @@ class Subject extends Model implements TableInterface
 	{
 		switch ($header) {
 			case 'ID':
-				return $this->ID;
+				return $this->id;
 			case 'Nome':
 				return $this->name;
 		}

@@ -13,6 +13,11 @@ class ClassInformation extends Model implements TableInterface
 
 	protected $dates = ['date_start', 'date_end'];
 
+	public function students()
+	{
+		return $this->belongsToMany(Student::class);
+	}
+
 	/**
 	 * A list of headers to be used when a table is displayed
 	 *
@@ -34,7 +39,7 @@ class ClassInformation extends Model implements TableInterface
 	public function getValueForHeader( $header ) {
 		switch ($header) {
 			case 'ID':
-				return $this->ID;
+				return $this->id;
 			case 'Data Início':
 				return $this->date_start->format('d/m/Y');
 			case 'Data Fim':
