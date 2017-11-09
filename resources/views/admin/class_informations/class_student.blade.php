@@ -4,6 +4,7 @@
   <div class="container">
     <div class="row">
       <h3>Adiministração de alunos na turma</h3>
-      <class-student></class-student>
+      {{--@php dd($class_information->id) @endphp--}}
+      <class-student class-information="{{$class_information->id}}"></class-student>
     </div>
 @endsection

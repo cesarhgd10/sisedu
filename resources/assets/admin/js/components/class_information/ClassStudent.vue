@@ -15,7 +15,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr v-for="student in students">
+                        <td>Excluir</td>
+                        <td>{{ student.user.name }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -25,8 +27,31 @@
 </template>
 
 <script>
-  export default {
+  import ADMIN_CONFIG from '../../services/adminConfig';
+  import store from '../../store/store';
+  import 'select2';
 
+  export default {
+    props: ['classInformation'],
+    computed: {
+      students() {
+        return store.state.classStudent.students;
+      }
+    },
+    mounted() {
+      store.dispatch('classStudent/query', this.classInformation);
+      $("#students").select2({
+        ajax: {
+          url: `${ADMIN_CONFIG.API_URL}/students`,
+          dataType: 'json',
+          dalay: 250,
+          precessResults(data) {
+
+          }
+        }
+      });
+
+    }
   }
 
 </script>
