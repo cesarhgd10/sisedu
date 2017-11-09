@@ -4,6 +4,7 @@ namespace SisEdu\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use SisEdu\Http\Controllers\Controller;
+use SisEdu\Http\Requests\ClassStudentRequest;
 use SisEdu\Models\ClassInformation;
 
 class ClassStudentsController extends Controller
@@ -28,12 +29,16 @@ class ClassStudentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \SisEdu\Http\Requests\ClassStudentRequest  $request
+     * @param \SisEdu\Models\ClassInformation $class_information
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassStudentRequest $request, ClassInformation $class_information)
     {
-        //
+        $student = Student::find($request->get('student_id'));
+        $class_information->students->save($student);
+        return $student;
     }
 
     /**
